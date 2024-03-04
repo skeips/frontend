@@ -14,8 +14,9 @@ const Navbar = () => {
     const menuRef = React.useRef();
     const dropdown_toggle = (e) =>{
         menuRef.current.classList.toggle("nav-menu-visible");
-        e.target.classList.toggle("open");
-    }
+        e.target.classList.toggle("open");    }
+
+    const email = localStorage.getItem("email");
 
 
 
@@ -33,10 +34,11 @@ const Navbar = () => {
             <li onClick={() => {setMenu("kids")}}><Link to='/kids'>Kids</Link> {menu==="kids"?<hr/>:<></>}</li>
         </ul>
         <div className="nav-login-cart">
+            
             {localStorage.getItem("auth-token")
-            ?<button onClick={() => {localStorage.removeItem("auth-token"); window.location.replace("/")}}>Logout</button>
+            ?<><span>Welcome, {email}</span><button onClick={() => {localStorage.removeItem("auth-token"); window.location.replace("/")}}>Logout</button></>
             :<button> <Link to='/login'>Login</Link></button>}
-            {/* <button> <Link to='/login'>Login</Link></button> */}
+            
            <Link to='/cart'><img src={cart_icon} alt="cart"/></Link>
             <div className="nav-cart-count">{getTotalCartItems()}</div>
         </div>

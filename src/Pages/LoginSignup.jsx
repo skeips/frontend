@@ -3,7 +3,7 @@ import './CSS/LoginSignup.css'
 
 const LoginSignup = () => {
 
-  const [state, setState] = React.useState("Sign up");
+  const [state, setState] = React.useState("login");
   const [formData, setFormData] = React.useState({username: "", password: "", email: ""});
 
   const changeHandler = (e) => {
@@ -23,7 +23,10 @@ const LoginSignup = () => {
       body: JSON.stringify(formData)      
     }).then((response) => response.json()).then((data) => responseData = data)
     if(responseData.success){
-      localStorage.setItem("auth-token", responseData.token)   
+      localStorage.setItem("auth-token", responseData.token)
+      console.log(responseData)
+      localStorage.setItem("email", formData.email)
+      
       window.location.replace("/");   
     }
     else{
